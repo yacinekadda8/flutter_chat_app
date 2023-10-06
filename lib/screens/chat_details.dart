@@ -41,7 +41,7 @@ class ChatDetails extends StatelessWidget {
         child: ListView.builder(
           itemCount: 4,
           itemBuilder: (BuildContext context, int index) {
-            return ChatBubble(
+            return const ChatBubble(
               isMe: true,
               topLeft: 30,
             );
@@ -49,7 +49,7 @@ class ChatDetails extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.all(defaultPadding / 2),
+        padding: const EdgeInsets.all(defaultPadding / 2),
         child: ChatTextField(
           labelText: "Aa",
           controller: textEditingController,
