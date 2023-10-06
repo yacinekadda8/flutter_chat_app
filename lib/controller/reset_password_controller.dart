@@ -1,3 +1,4 @@
+import 'package:chat_app/core/services/apis.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class ResetPasswordController extends GetxController {
       isLoading = true;
 
       try {
-        await FirebaseAuth.instance.sendPasswordResetEmail(
+        await APIs.auth.sendPasswordResetEmail(
           email: email.text,
         );
         // Show a success message or navigate to a success screen

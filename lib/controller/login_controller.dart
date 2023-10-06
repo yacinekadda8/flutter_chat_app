@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:chat_app/constants.dart';
+import 'package:chat_app/core/services/apis.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class LoginController extends GetxController {
     isLoading = true;
     update();
     try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      final credential = await APIs.auth.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );

@@ -1,8 +1,9 @@
+import 'package:chat_app/core/services/apis.dart';
 import 'package:chat_app/screens/auth/login.dart';
 import 'package:chat_app/screens/auth/reset_password.dart';
 import 'package:chat_app/screens/auth/signup.dart';
 import 'package:chat_app/screens/chat_details.dart';
-import 'package:chat_app/screens/home.dart';
+import 'package:chat_app/screens/inbox.dart';
 
 import 'package:chat_app/screens/welcome/view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,9 +16,9 @@ abstract class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return FirebaseAuth.instance.currentUser != null &&
-                  FirebaseAuth.instance.currentUser!.emailVerified
-              ? const HomeScreen ()
+          return APIs.auth.currentUser != null &&
+                  APIs.auth.currentUser!.emailVerified
+              ? const InboxScreen()
               : const WelcomePage();
         },
         routes: <RouteBase>[
@@ -42,7 +43,7 @@ abstract class AppRouter {
           GoRoute(
             path: "home",
             builder: (BuildContext context, GoRouterState state) {
-              return const HomeScreen();
+              return const InboxScreen();
             },
           ),
           GoRoute(

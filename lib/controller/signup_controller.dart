@@ -1,4 +1,5 @@
 import 'package:chat_app/constants.dart';
+import 'package:chat_app/core/services/apis.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,12 +19,12 @@ class SignupController extends GetxController {
       isLoading = true;
     try {
     
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await APIs.auth.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
       //Navigator.of(context).pushReplacementNamed('home');
-      FirebaseAuth.instance.currentUser!.sendEmailVerification();
+      APIs.auth.currentUser!.sendEmailVerification();
       GoRouter.of(context).pushReplacement("/login");
       passwordController.clear();
       emailController.clear();
