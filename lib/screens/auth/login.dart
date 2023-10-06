@@ -78,10 +78,10 @@ class Login extends StatelessWidget {
                   children: [
                     const SizedBox(height: defaultPadding),
                     MyTextField(
-                        emailController: controller.emailController,
+                        controller: controller.emailController,
                         labelText: 'Email'),
                     MyTextField(
-                        emailController: controller.passwordController,
+                        controller: controller.passwordController,
                         labelText: 'Password'),
                     TextButton(
                       onPressed: () {

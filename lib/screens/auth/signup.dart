@@ -16,97 +16,99 @@ class Signup extends StatelessWidget {
   Widget build(BuildContext context) {
     //double dWidth = MediaQuery.of(context).size.width;
     double dHeight = MediaQuery.of(context).size.height;
-    SignupController controller = Get.put(SignupController());
-    return ModalProgressHUD(
-      inAsyncCall: controller.isLoading,
-      child: Scaffold(
-          body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ClipPath(
-              clipper: WaveClipperTwo(),
-              child: Container(
-                height: dHeight / 2.5,
-                decoration: const BoxDecoration(
-                  color: kprimaryColor,
-                  //   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(150)),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: defaultPadding * 3),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 120, // specify your desired width here
-                        height: 120, // specify your desired height here
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/images/logo.png"),
-                            fit: BoxFit.fitHeight,
+    Get.put(SignupController());
+    return GetBuilder<SignupController>(builder: (controller) {
+      return ModalProgressHUD(
+        inAsyncCall: controller.isLoading,
+        child: Scaffold(
+            body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ClipPath(
+                clipper: WaveClipperTwo(),
+                child: Container(
+                  height: dHeight / 2.5,
+                  decoration: const BoxDecoration(
+                    color: kprimaryColor,
+                    //   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(150)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: defaultPadding * 3),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 120, // specify your desired width here
+                          height: 120, // specify your desired height here
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/logo.png"),
+                              fit: BoxFit.fitHeight,
+                            ),
                           ),
                         ),
-                      ),
-                      // const SizedBox(height: defaultPadding),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: defaultPadding * 2,
-                          horizontal: defaultPadding,
+                        // const SizedBox(height: defaultPadding),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: defaultPadding * 2,
+                            horizontal: defaultPadding,
+                          ),
+                          child: Text(
+                            'Create Account',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                color: thiredColor,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 40),
+                          ),
                         ),
-                        child: Text(
-                          'Create Account',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              color: thiredColor,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 40),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: defaultPadding),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                MyTextField(
-                    emailController: controller.usernameController,
-                    labelText: 'UserName'),
-                MyTextField(
-                    emailController: controller.emailController,
-                    labelText: 'Email'),
-                MyTextField(
-                    emailController: controller.phoneController,
-                    labelText: 'Phone'),
-                MyTextField(
-                    emailController: controller.passwordController,
-                    labelText: 'Password'),
-                const SizedBox(height: defaultPadding),
-                Authbutton(
-                  text: 'Sign up',
-                  onPressed: () {
-                    controller.signUp(context);
-                  },
-                ),
-                const DividerText(),
-                Authbutton(
-                  text: 'Log In',
-                  onPressed: () => context.pop(),
-                  backgroundColor: thiredColor,
-                  foregroundColor: highlightColor,
-                  side: const BorderSide(
-                    color: highlightColor,
-                    width: 2,
+              const SizedBox(height: defaultPadding),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  MyTextField(
+                      controller: controller.usernameController,
+                      labelText: 'UserName'),
+                  MyTextField(
+                      controller: controller.emailController,
+                      labelText: 'Email'),
+                  MyTextField(
+                      controller: controller.phoneController,
+                      labelText: 'Phone'),
+                  MyTextField(
+                      controller: controller.passwordController,
+                      labelText: 'Password'),
+                  const SizedBox(height: defaultPadding),
+                  Authbutton(
+                    text: 'Sign up',
+                    onPressed: () {
+                      controller.signUp(context);
+                    },
                   ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      )),
-    );
+                  const DividerText(),
+                  Authbutton(
+                    text: 'Log In',
+                    onPressed: () => context.pop(),
+                    backgroundColor: thiredColor,
+                    foregroundColor: highlightColor,
+                    side: const BorderSide(
+                      color: highlightColor,
+                      width: 2,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        )),
+      );
+    });
   }
 }

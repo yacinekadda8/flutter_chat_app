@@ -1,6 +1,7 @@
 import 'package:chat_app/screens/auth/login.dart';
 import 'package:chat_app/screens/auth/reset_password.dart';
 import 'package:chat_app/screens/auth/signup.dart';
+import 'package:chat_app/screens/chat_details.dart';
 import 'package:chat_app/screens/home.dart';
 
 import 'package:chat_app/screens/welcome/view.dart';
@@ -42,6 +43,12 @@ abstract class AppRouter {
             path: "home",
             builder: (BuildContext context, GoRouterState state) {
               return const HomeScreen();
+            },
+          ),
+          GoRoute(
+            path: "chatDetails",
+            builder: (BuildContext context, GoRouterState state) {
+              return const ChatDetails();
             },
           ),
         ],

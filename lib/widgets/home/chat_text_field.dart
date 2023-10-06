@@ -1,8 +1,8 @@
 import 'package:chat_app/constants.dart';
 import 'package:flutter/material.dart';
 
-class MyTextField extends StatelessWidget {
-  const MyTextField({
+class ChatTextField extends StatelessWidget {
+  const ChatTextField({
     Key? key,
     required this.controller,
     required this.labelText,
@@ -22,6 +22,12 @@ class MyTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
+          suffixIcon: IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.send,
+                color: kprimaryColor,
+              )),
           border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(15))),
           labelText: labelText,

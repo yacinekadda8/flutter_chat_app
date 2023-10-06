@@ -7,9 +7,13 @@ import 'package:go_router/go_router.dart';
 class ResetPasswordController extends GetxController {
   TextEditingController email = TextEditingController();
   GlobalKey<FormState> formState = GlobalKey();
+  bool isLoading = false;
+
   // Function to reset the password
   resetPassword(context) async {
     if (formState.currentState!.validate()) {
+      isLoading = true;
+
       try {
         await FirebaseAuth.instance.sendPasswordResetEmail(
           email: email.text,
@@ -39,6 +43,7 @@ class ResetPasswordController extends GetxController {
           print('Error: $e');
         }
       }
+      isLoading = false;
     }
   }
 }
