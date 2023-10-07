@@ -1,10 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_app/constants.dart';
-import 'package:chat_app/widgets/auth/my_text_field.dart';
 import 'package:chat_app/widgets/home/chat_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../widgets/auth/custom_textformfield.dart';
 import '../widgets/home/chat_bubble.dart';
 
 class ChatDetails extends StatelessWidget {
@@ -21,8 +19,21 @@ class ChatDetails extends StatelessWidget {
               onPressed: () => context.pop(),
               icon: const Icon(Icons.arrow_back_ios),
             ),
-            const CircleAvatar(
-              backgroundImage: AssetImage("assets/images/ronaldo.jpg"),
+            // const CircleAvatar(
+            //   backgroundImage: AssetImage("assets/images/ronaldo.jpg"),
+            // ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: CachedNetworkImage(
+                height: 35,
+                width: 35,
+                fit: BoxFit.cover,
+                imageUrl:
+                    "assets/images/ronaldo.jpg", //userModel.image.toString(),
+                //placeholder: (context, url) => CircularProgressIndicator(),
+                errorWidget: (context, url, error) =>
+                    const CircleAvatar(child: Icon(Icons.person)),
+              ),
             ),
           ],
         ),

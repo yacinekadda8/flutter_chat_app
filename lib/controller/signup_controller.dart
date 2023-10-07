@@ -16,20 +16,31 @@ class SignupController extends GetxController {
   bool isLoading = false;
 
   void signUp(context) async {
-      isLoading = true;
+    isLoading = true;
     try {
-    
       await APIs.auth.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
       //Navigator.of(context).pushReplacementNamed('home');
-      APIs.auth.currentUser!.sendEmailVerification();
-      GoRouter.of(context).pushReplacement("/login");
-      passwordController.clear();
-      emailController.clear();
-      passwordController.clear();
-      phoneController.clear();
+      if (await (APIs.userExists())) {
+        GoRouter.of(context).pushReplacement("/login");
+        usernameController.clear();
+        passwordController.clear();
+        emailController.clear();
+        passwordController.clear();
+        phoneController.clear();
+      } else {
+        APIs.createUser(name: usernameController.text).then((value) {
+          GoRouter.of(context).pushReplacement("/login");
+          usernameController.clear();
+          passwordController.clear();
+          emailController.clear();
+          passwordController.clear();
+          phoneController.clear();
+        });
+      }
+      APIs.user.sendEmailVerification();
       isLoading = false;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
