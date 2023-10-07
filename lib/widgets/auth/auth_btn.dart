@@ -8,6 +8,8 @@ class Authbutton extends StatelessWidget {
   final Color? foregroundColor;
   final BorderSide side;
   final void Function()? onPressed;
+  final double horizontal;
+  final double vertical;
 
   const Authbutton({
     Key? key,
@@ -16,12 +18,14 @@ class Authbutton extends StatelessWidget {
     this.foregroundColor = thiredColor,
     this.side = BorderSide.none,
     required this.onPressed,
+     this.horizontal = 10,
+     this.vertical = 10,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+      padding:  EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
       child: TextButton(
         style: TextButton.styleFrom(
           backgroundColor: backgroundColor, // background color

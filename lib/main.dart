@@ -37,10 +37,10 @@ class MyApp extends StatelessWidget {
               title: 'Flutter Chat App',
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
-                appBarTheme: AppBarTheme(
+                appBarTheme: const AppBarTheme(
                   backgroundColor: kprimaryColor,
                 ),
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                colorScheme: ColorScheme.fromSeed(seedColor: kprimaryColor),
                 useMaterial3: true,
                 scaffoldBackgroundColor: thiredColor,
                 textTheme:
