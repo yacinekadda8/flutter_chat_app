@@ -13,8 +13,7 @@ class UserSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double mqHeight = MediaQuery.of(context).size.height;
-    double mqWidth = MediaQuery.of(context).size.width;
+
     UserSettingsController controller = Get.put(UserSettingsController());
 
     return Scaffold(
@@ -27,72 +26,80 @@ class UserSettings extends StatelessWidget {
           icon: const Icon(
             Icons.logout,
           )),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Center(
-            child: Stack(
-              children: [
-                ClipPath(
-                  clipper: WaveClipperTwo(),
-                  child: Container(
-                    height: 140,
-                    color: kprimaryColor,
-                  ),
-                ),
-                Center(
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(150),
-                      child: CachedNetworkImage(
-                        height: mqWidth * .5,
-                        width: mqWidth * .5,
-                        fit: BoxFit.cover,
-                        imageUrl: userModel.image,
-                        //placeholder: (context, url) => CircularProgressIndicator(),
-                        errorWidget: (context, url, error) =>
-                            const CircleAvatar(child: Icon(Icons.person)),
-                      )),
-                ),
-                Positioned(
-                  left: mqWidth / 1.7,
-                  top: mqHeight / 6,
-                  child: Container(
-                    width: mqWidth / 10,
-                    height: mqWidth / 10,
-                    decoration: BoxDecoration(
-                      color: kprimaryColor,
-                      borderRadius: BorderRadius.circular(50),
-                      /* border: Border.all(
-                          width: 1,
-                          color: thiredColor,
-                        )*/
+      body: Form(
+        key: controller.globalKey,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Center(
+                child: Stack(
+                  children: [
+                    ClipPath(
+                      clipper: WaveClipperTwo(),
+                      child: Container(
+                        height: 140,
+                        color: kprimaryColor,
+                      ),
                     ),
-                    child: const Icon(
-                      Icons.edit,
-                      color: secondaryColor,
-                      size: 20,
+                    Center(
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(150),
+                          child: CachedNetworkImage(
+                            height: controller.getWidth(context) * .5,
+                            width: controller.getWidth(context)  * .5,
+                            fit: BoxFit.cover,
+                            imageUrl: userModel.image,
+                            //placeholder: (context, url) => CircularProgressIndicator(),
+                            errorWidget: (context, url, error) =>
+                                const CircleAvatar(child: Icon(Icons.person)),
+                          )),
                     ),
-                  ),
-                )
-              ],
-            ),
+                    Positioned(
+                      left: controller.getWidth(context)  / 1.7,
+                      top: controller.getHeight(context)  / 6,
+                      child: Container(
+                        width: controller.getWidth(context) / 10,
+                        height: controller.getWidth(context) / 10,
+                        decoration: BoxDecoration(
+                          color: kprimaryColor,
+                          borderRadius: BorderRadius.circular(50),
+                          /* border: Border.all(
+                              width: 1,
+                              color: thiredColor,
+                            )*/
+                        ),
+                        child: const Icon(
+                          Icons.edit,
+                          color: secondaryColor,
+                          size: 20,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Text(
+                userModel.name,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
+                userModel.email,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 20, color: Colors.black),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+                child: UpdateInfoSection(userModel: userModel),
+              )
+            ],
           ),
-          Text(
-            userModel.name,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
-          ),
-          Text(
-            userModel.email,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 20, color: Colors.black),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-            child: UpdateInfoSection(userModel: userModel),
-          )
-        ],
+        ),
       ),
     );
   }
