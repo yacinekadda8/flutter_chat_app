@@ -31,7 +31,7 @@ class SignupController extends GetxController {
         passwordController.clear();
         phoneController.clear();
       } else {
-        APIs.createUser(name: usernameController.text).then((value) {
+        APIs.createUserInSignUp(name: usernameController.text).then((value) {
           GoRouter.of(context).pushReplacement("/login");
           usernameController.clear();
           passwordController.clear();
@@ -78,5 +78,14 @@ class SignupController extends GetxController {
       }
     }
     isLoading = false;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    usernameController.dispose();
+    phoneController.dispose();
+    passwordController.dispose();
   }
 }

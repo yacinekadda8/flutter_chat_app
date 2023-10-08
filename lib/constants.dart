@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const kprimaryColor = Color(0xFF00C9C8);
 const secondaryColor = Color(0xFF3A1238);
-const thiredColor = Color(0xFFEEFCFC);
+const kthiredColor = Color(0xFFEEFCFC);
 const highlightColor = Color(0xFFA76DC9);
 
 const darkColor = Color(0xFF191923);

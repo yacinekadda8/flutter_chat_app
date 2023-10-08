@@ -1,8 +1,8 @@
-import 'package:chat_app/constants.dart';
-import 'package:chat_app/data/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+
+import 'package:chat_app/constants.dart';
+import 'package:chat_app/data/models/user_model.dart';
 
 import 'circel_user_image.dart';
 

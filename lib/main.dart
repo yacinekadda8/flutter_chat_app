@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
                 ),
                 colorScheme: ColorScheme.fromSeed(seedColor: kprimaryColor),
                 useMaterial3: true,
-                scaffoldBackgroundColor: thiredColor,
+                scaffoldBackgroundColor: kthiredColor,
                 textTheme:
                     GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
                         .apply(bodyColor: Colors.white)

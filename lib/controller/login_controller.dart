@@ -6,14 +6,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isLoading = false;
 
-/*
-  // ========================   LOGIN WITH GOOGLE ========================
+  // ========================   LOGIN WITH GOOGLE LOGIC ========================
 
   Future signInWithGoogle(context) async {
     // Trigger the authentication flow
@@ -31,10 +31,12 @@ class LoginController extends GetxController {
     );
     // Once signed in, return the UserCredential
     await FirebaseAuth.instance.signInWithCredential(credential);
-    Navigator.of(context).pushNamedAndRemoveUntil('home', (route) => false);
+    APIs.createUserInGoogleUp().then((value) {
+      GoRouter.of(context).pushReplacement("/home");
+    });
   }
   // ========================   LOGIN WITH EMAIL && PASSWORD ========================
-*/
+
   void login(context) async {
     isLoading = true;
     update();
@@ -93,5 +95,12 @@ class LoginController extends GetxController {
     }
     isLoading = false;
     update();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
   }
 }

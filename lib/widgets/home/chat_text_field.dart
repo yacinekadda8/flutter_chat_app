@@ -24,7 +24,7 @@ class ChatTextField extends StatelessWidget {
         decoration: InputDecoration(
           suffixIcon: IconButton(
               onPressed: () {},
-              icon: Icon(
+              icon: const Icon(
                 Icons.send,
                 color: kprimaryColor,
               )),

@@ -7,8 +7,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
-class InboxScreen extends StatelessWidget {
+class InboxScreen extends StatefulWidget {
   const InboxScreen({super.key});
+  @override
+  @override
+  State<InboxScreen> createState() => _InboxScreenState();
+}
+
+class _InboxScreenState extends State<InboxScreen> {
+  @override
+  void initState() {
+    APIs.getCurrentUserInfo();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +32,7 @@ class InboxScreen extends StatelessWidget {
           IconButton(
               //onPressed: () => controller.logout(context),
               onPressed: () => context
-                  .go('/userSettings', extra: {'usermodel':controller.list[0]}),
+                  .go('/userSettings', extra: {'usermodel': APIs.currentUser}),
               icon: const Icon(Icons.settings))
         ],
       ),
@@ -42,7 +53,7 @@ class InboxScreen extends StatelessWidget {
             const SizedBox(height: defaultPadding),
             Expanded(
               child: StreamBuilder(
-                  stream: APIs.firestore.collection("users").snapshots(),
+                  stream: APIs.getAllUsers(),
                   builder: (context, snapshot) {
                     switch (snapshot.connectionState) {
                       // if data is loading

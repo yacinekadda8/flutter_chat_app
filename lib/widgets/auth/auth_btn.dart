@@ -15,17 +15,17 @@ class Authbutton extends StatelessWidget {
     Key? key,
     required this.text,
     this.backgroundColor = kprimaryColor,
-    this.foregroundColor = thiredColor,
+    this.foregroundColor = kthiredColor,
     this.side = BorderSide.none,
     required this.onPressed,
-     this.horizontal = 10,
-     this.vertical = 10,
+    this.horizontal = 10,
+    this.vertical = 10,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:  EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
+      padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
       child: TextButton(
         style: TextButton.styleFrom(
           backgroundColor: backgroundColor, // background color

@@ -10,21 +10,20 @@ class CircleUserImage extends StatelessWidget {
   const CircleUserImage({
     super.key,
     required this.userModel,
-     this.h = .07,
-     this.w = .07,
+    this.h = .07,
+    this.w = .07,
   });
 
   @override
   Widget build(BuildContext context) {
     double mqHeight = MediaQuery.of(context).size.height;
-    double mqWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
         ClipRRect(
             borderRadius: BorderRadius.circular(50),
             child: CachedNetworkImage(
               height: mqHeight * h,
-              width: mqWidth * w,
+              width: mqHeight * w,
               fit: BoxFit.cover,
               imageUrl: userModel.image.toString(),
               //placeholder: (context, url) => CircularProgressIndicator(),
@@ -32,8 +31,8 @@ class CircleUserImage extends StatelessWidget {
                   const CircleAvatar(child: Icon(Icons.person)),
             )),
         Positioned(
-          left: 35,
-          top: 35,
+          left: 40,
+          top: 40,
           child: Container(
             width: 15,
             height: 15,
@@ -41,8 +40,8 @@ class CircleUserImage extends StatelessWidget {
                 color: Colors.green,
                 borderRadius: BorderRadius.circular(50),
                 border: Border.all(
-                  width: 1,
-                  color: thiredColor,
+                  width: 2,
+                  color: kthiredColor,
                 )),
           ),
         )

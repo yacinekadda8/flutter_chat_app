@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/controller/login_controller.dart';
 import 'package:chat_app/widgets/auth/auth_btn.dart';
@@ -17,7 +19,7 @@ class Login extends StatelessWidget {
     //double dWidth = MediaQuery.of(context).size.width;
     double dHeight = MediaQuery.of(context).size.height;
     Get.put(LoginController());
-    print("======================= $dHeight");
+    //print("======================= $dHeight");
     return GetBuilder<LoginController>(builder: (controller) {
       return ModalProgressHUD(
         inAsyncCall: controller.isLoading,
@@ -60,7 +62,7 @@ class Login extends StatelessWidget {
                             'Login',
                             textAlign: TextAlign.left,
                             style: TextStyle(
-                                color: thiredColor,
+                                color: kthiredColor,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 40),
                           ),
@@ -71,7 +73,7 @@ class Login extends StatelessWidget {
                 ),
               ),
               Container(
-                color: thiredColor,
+                color: kthiredColor,
                 height: dHeight / 1.5,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -108,16 +110,45 @@ class Login extends StatelessWidget {
                         controller.login(context);
                       },
                     ),
-                    const DividerText(),
                     Authbutton(
                       onPressed: () => context.go("/signup"),
                       text: 'Sign up',
-                      backgroundColor: thiredColor,
+                      backgroundColor: kthiredColor,
                       foregroundColor: highlightColor,
                       side: const BorderSide(
                         color: highlightColor,
                         width: 2,
                       ),
+                    ),
+                    const DividerText(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: MaterialButton(
+                          height: 40,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              side: const BorderSide(
+                                color: kprimaryColor,
+                                width: 2,
+                              )),
+                          //color: highlightColor,
+                          textColor: kprimaryColor,
+                          onPressed: () {
+                            controller.signInWithGoogle(context);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "Login with ",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Image.asset(
+                                "assets/images/google.png",
+                                width: 18,
+                              )
+                            ],
+                          )),
                     ),
                   ],
                 ),

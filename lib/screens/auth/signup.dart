@@ -59,7 +59,7 @@ class Signup extends StatelessWidget {
                             'Create Account',
                             textAlign: TextAlign.left,
                             style: TextStyle(
-                                color: thiredColor,
+                                color: kthiredColor,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 40),
                           ),
@@ -96,7 +96,7 @@ class Signup extends StatelessWidget {
                   Authbutton(
                     text: 'Log In',
                     onPressed: () => context.pop(),
-                    backgroundColor: thiredColor,
+                    backgroundColor: kthiredColor,
                     foregroundColor: highlightColor,
                     side: const BorderSide(
                       color: highlightColor,
