@@ -1,7 +1,12 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/controller/user_settings_controller.dart';
+import 'package:chat_app/core/functions/snack_bar.dart';
+import 'package:chat_app/core/services/apis.dart';
 import 'package:chat_app/data/models/user_model.dart';
+import 'package:chat_app/widgets/auth/auth_btn.dart';
 import 'package:chat_app/widgets/update_info_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
@@ -13,7 +18,6 @@ class UserSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     UserSettingsController controller = Get.put(UserSettingsController());
 
     return Scaffold(
@@ -46,8 +50,8 @@ class UserSettings extends StatelessWidget {
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(150),
                           child: CachedNetworkImage(
-                            height: controller.getWidth(context) * .5,
-                            width: controller.getWidth(context)  * .5,
+                            height: controller.mq(context).width * .5,
+                            width: controller.mq(context).width * .5,
                             fit: BoxFit.cover,
                             imageUrl: userModel.image,
                             //placeholder: (context, url) => CircularProgressIndicator(),
@@ -56,11 +60,11 @@ class UserSettings extends StatelessWidget {
                           )),
                     ),
                     Positioned(
-                      left: controller.getWidth(context)  / 1.7,
-                      top: controller.getHeight(context)  / 6,
+                      left: controller.mq(context).width / 1.7,
+                      top: controller.mq(context).height / 6,
                       child: Container(
-                        width: controller.getWidth(context) / 10,
-                        height: controller.getWidth(context) / 10,
+                        width: controller.mq(context).width / 10,
+                        height: controller.mq(context).width / 10,
                         decoration: BoxDecoration(
                           color: kprimaryColor,
                           borderRadius: BorderRadius.circular(50),
@@ -69,11 +73,15 @@ class UserSettings extends StatelessWidget {
                               color: thiredColor,
                             )*/
                         ),
-                        child: const Icon(
-                          Icons.edit,
-                          color: secondaryColor,
-                          size: 20,
-                        ),
+                        child: IconButton(
+                            onPressed: () {
+                              controller.showEditImgBottomSheet(context);
+                            },
+                            icon: const Icon(
+                              Icons.edit,
+                              color: secondaryColor,
+                              size: 20,
+                            )),
                       ),
                     )
                   ],
@@ -95,7 +103,81 @@ class UserSettings extends StatelessWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-                child: UpdateInfoSection(userModel: userModel),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const SizedBox(height: defaultPadding),
+                    TextFormField(
+                      //controller: mycontroller,
+                      onSaved: (newValue) =>
+                          APIs.currentUser.name = newValue ?? '',
+                      validator: (value) => value != null && value.isNotEmpty
+                          ? null
+                          : 'Required Field',
+                      initialValue: userModel.name,
+                      decoration: InputDecoration(
+                          hintText: "Youre Name",
+                          prefixIcon:
+                              const Icon(Icons.person, color: kprimaryColor),
+                          hintStyle:
+                              const TextStyle(fontSize: 14, color: Colors.grey),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 2, horizontal: 20),
+                          filled: true,
+                          //fillColor: Colors.grey[200],
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                  color: Color.fromARGB(255, 184, 184, 184))),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide:
+                                  const BorderSide(color: Colors.grey))),
+                    ),
+                    const SizedBox(height: defaultPadding / 2),
+                    TextFormField(
+                      //controller: mycontroller,
+                      onSaved: (newValue) =>
+                          APIs.currentUser.about = newValue ?? '',
+                      validator: (value) => value != null && value.isNotEmpty
+                          ? null
+                          : 'Required Field',
+                      initialValue: userModel.about,
+                      decoration: InputDecoration(
+                          hintText: "Bio",
+                          prefixIcon: const Icon(Icons.abc_outlined,
+                              color: kprimaryColor),
+                          hintStyle:
+                              const TextStyle(fontSize: 14, color: Colors.grey),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 2, horizontal: 20),
+                          filled: true,
+                          //fillColor: Colors.grey[200],
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                  color: Color.fromARGB(255, 184, 184, 184))),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide:
+                                  const BorderSide(color: Colors.grey))),
+                    ),
+                    const SizedBox(height: defaultPadding),
+                    Authbutton(
+                      onPressed: () {
+                        if (controller.globalKey.currentState!.validate()) {
+                          controller.globalKey.currentState!.save();
+                          APIs.updateUserInfo().then((value) =>
+                              showSnackbar(context, 'Updated successfully!'));
+                          log('updateUserInfo done');
+                        }
+                      },
+                      text: "Update",
+                      horizontal: 0,
+                      vertical: 0,
+                    ),
+                  ],
+                ),
               )
             ],
           ),
