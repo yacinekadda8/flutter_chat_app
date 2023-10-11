@@ -1,6 +1,7 @@
 # chat_app
 
-A new Flutter project.
+A Chat App Flutter project with Firebase.
+Using Getx and MVC,
 
 ## Getting Started
 
