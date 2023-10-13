@@ -61,8 +61,8 @@ class UserSettingsController extends GetxController {
                   children: [
                     ElevatedButton(
                       onPressed: () async {
-                        final XFile? img =
-                            await picker.pickImage(source: ImageSource.gallery,imageQuality: 80);
+                        final XFile? img = await picker.pickImage(
+                            source: ImageSource.gallery, imageQuality: 80);
                         if (img != null) {
                           log("Image Path: ${img.path} -- MimeType: ${img.mimeType}");
                           image = img.path;
@@ -87,8 +87,8 @@ class UserSettingsController extends GetxController {
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        final XFile? img =
-                            await picker.pickImage(source: ImageSource.camera,imageQuality: 80);
+                        final XFile? img = await picker.pickImage(
+                            source: ImageSource.camera, imageQuality: 80);
                         if (img != null) {
                           log("Image Path: ${img.path}");
                           image = img.path;

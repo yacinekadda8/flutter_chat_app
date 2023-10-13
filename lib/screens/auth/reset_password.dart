@@ -20,7 +20,6 @@ class _ResetPasswordState extends State<ResetPassword> {
     ResetPasswordController controller = Get.put(ResetPasswordController());
     return ModalProgressHUD(
       inAsyncCall: controller.isLoading,
-
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Reset Password'),

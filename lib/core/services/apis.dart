@@ -113,4 +113,11 @@ class APIs {
       'image': currentUser.image,
     });
   }
+
+  // *******  Inbox and Chat Screen apis *******//
+
+  // fetch all messages from specific Conversation from firestore
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllMessages() {
+    return firestore.collection("messages").snapshots();
+  }
 }

@@ -6,7 +6,7 @@ void showSnackbar(BuildContext context, String message) {
     SnackBar(
       backgroundColor: highlightColor,
       content: Text(message),
-      duration: const Duration(seconds:4),
+      duration: const Duration(seconds: 4),
     ),
   );
 }
