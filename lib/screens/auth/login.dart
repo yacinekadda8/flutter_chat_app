@@ -90,7 +90,7 @@ class Login extends StatelessWidget {
                         GoRouter.of(context).pushReplacement("/resetPassword");
                       },
                       style: TextButton.styleFrom(
-                          foregroundColor: secondaryColor, // text color
+                          foregroundColor: highlightColor, // text color
                           alignment: Alignment.topRight,
                           padding: const EdgeInsets.symmetric(
                               horizontal: defaultPadding / 2),

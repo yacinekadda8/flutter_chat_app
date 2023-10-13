@@ -37,7 +37,7 @@ class FriendMsgCard extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: secondaryColor,
+                        color: highlightColor,
                       ),
                     ),
                     const Text(

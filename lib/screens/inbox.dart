@@ -47,7 +47,7 @@ class _InboxScreenState extends State<InboxScreen> {
               style: TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.bold,
-                color: secondaryColor,
+                color: highlightColor,
               ),
             ),
             const SizedBox(height: defaultPadding),
@@ -84,7 +84,7 @@ class _InboxScreenState extends State<InboxScreen> {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: secondaryColor,
+                              color: highlightColor,
                             ),
                           );
                         }

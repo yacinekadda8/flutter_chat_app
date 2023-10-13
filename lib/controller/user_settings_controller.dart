@@ -1,20 +1,26 @@
-// ignore_for_file: unused_import
+import 'dart:developer';
 
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/core/services/apis.dart';
-import 'package:chat_app/data/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UserSettingsController extends GetxController {
   final globalKey = GlobalKey<FormState>();
+  final ImagePicker picker = ImagePicker();
+  String? image;
+
+  // device size
   Size mq(context) {
     return MediaQuery.of(context).size;
   }
 
-  //late UserModel userModel;
+  // late UserModel userModel;
+
+  // logout
   void logout(context) async {
     GoogleSignIn googleSignIn = GoogleSignIn();
     googleSignIn.disconnect();
@@ -25,7 +31,7 @@ class UserSettingsController extends GetxController {
   void showEditImgBottomSheet(context) {
     showModalBottomSheet(
         context: context,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
@@ -34,55 +40,78 @@ class UserSettingsController extends GetxController {
           return ListView(
             shrinkWrap: true,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(defaultPadding),
+              const Padding(
+                padding: EdgeInsets.all(defaultPadding),
                 child: Text(
                   "Update Profile Picture",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: secondaryColor),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: kblackColor,
+                  ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(
                     bottom: defaultPadding, top: defaultPadding),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        final XFile? img =
+                            await picker.pickImage(source: ImageSource.gallery);
+                        if (img != null) {
+                          log("Image Path: ${img.path} -- MimeType: ${img.mimeType}");
+                          image = img.path;
+                          update();
+                        }
+                        //Navigator For hiding showEditImgBottomSheet
+                        Navigator.pop(context);
+                      },
                       style: ElevatedButton.styleFrom(
-                        shape: CircleBorder(),
+                        shape: const CircleBorder(),
+                        backgroundColor: koilColor,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(defaultPadding),
+                      child: const Padding(
+                        padding: EdgeInsets.all(defaultPadding),
                         child: Icon(
                           Icons.collections_rounded,
-                          color: highlightColor,
-                          size: 40,
+                          color: kprimaryColor,
+                          size: 50,
                         ),
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        final XFile? img =
+                            await picker.pickImage(source: ImageSource.camera);
+                        if (img != null) {
+                          log("Image Path: ${img.path}");
+                          image = img.path;
+                          update();
+                        }
+                        //Navigator For hiding showEditImgBottomSheet
+                        Navigator.pop(context);
+                      },
                       style: ElevatedButton.styleFrom(
-                        shape: CircleBorder(),
+                        shape: const CircleBorder(),
+                        backgroundColor: koilColor,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(defaultPadding),
+                      child: const Padding(
+                        padding: EdgeInsets.all(defaultPadding),
                         child: Icon(
                           Icons.camera,
-                          color: highlightColor,
-                          size: 40,
+                          color: kprimaryColor,
+                          size: 50,
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: defaultPadding * 2),
+              const SizedBox(height: defaultPadding * 2),
             ],
           );
         });

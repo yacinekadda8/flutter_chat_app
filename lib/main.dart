@@ -49,9 +49,8 @@ class MyApp extends StatelessWidget {
                         .copyWith(
                           bodyLarge: const TextStyle(color: kbodyTextColor),
                           bodyMedium: const TextStyle(color: kbodyTextColor),
-                          displayLarge: const TextStyle(color: kTextColorWhite),
-                          displayMedium:
-                              const TextStyle(color: kTextColorWhite),
+                          displayLarge: const TextStyle(color: kthiredColor),
+                          displayMedium: const TextStyle(color: kthiredColor),
                         ),
               ),
               routerConfig: AppRouter.router,

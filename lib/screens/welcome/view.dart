@@ -53,7 +53,7 @@ class WelcomePage extends GetView<WelcomeController> {
                                   textAlign: TextAlign.center,
                                   softWrap: true,
                                   style: TextStyle(
-                                    color: secondaryColor,
+                                    color: highlightColor,
                                     fontSize: 24,
                                   ),
                                 ),
@@ -78,7 +78,7 @@ class WelcomePage extends GetView<WelcomeController> {
                                 softWrap: true,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: secondaryColor,
+                                  color: highlightColor,
                                   fontSize: 24,
                                 ),
                               ),
@@ -103,7 +103,7 @@ class WelcomePage extends GetView<WelcomeController> {
                                   softWrap: true,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: secondaryColor,
+                                    color: highlightColor,
                                     fontSize: 24,
                                   ),
                                 ),
@@ -137,7 +137,7 @@ class WelcomePage extends GetView<WelcomeController> {
                                       'START NOW',
                                       style: TextStyle(
                                         fontSize: 30,
-                                        color: darkColor,
+                                        color: kblackColor,
                                       ),
                                     ),
                                   ),
