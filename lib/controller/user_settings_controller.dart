@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/core/services/apis.dart';
@@ -61,10 +62,11 @@ class UserSettingsController extends GetxController {
                     ElevatedButton(
                       onPressed: () async {
                         final XFile? img =
-                            await picker.pickImage(source: ImageSource.gallery);
+                            await picker.pickImage(source: ImageSource.gallery,imageQuality: 80);
                         if (img != null) {
                           log("Image Path: ${img.path} -- MimeType: ${img.mimeType}");
                           image = img.path;
+                          APIs.updateUserPicture(File(img.path));
                           update();
                         }
                         //Navigator For hiding showEditImgBottomSheet
@@ -86,10 +88,11 @@ class UserSettingsController extends GetxController {
                     ElevatedButton(
                       onPressed: () async {
                         final XFile? img =
-                            await picker.pickImage(source: ImageSource.camera);
+                            await picker.pickImage(source: ImageSource.camera,imageQuality: 80);
                         if (img != null) {
                           log("Image Path: ${img.path}");
                           image = img.path;
+                          APIs.updateUserPicture(File(img.path));
                           update();
                         }
                         //Navigator For hiding showEditImgBottomSheet

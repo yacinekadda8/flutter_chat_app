@@ -8,7 +8,6 @@ import 'package:chat_app/core/functions/snack_bar.dart';
 import 'package:chat_app/core/services/apis.dart';
 import 'package:chat_app/data/models/user_model.dart';
 import 'package:chat_app/widgets/auth/auth_btn.dart';
-import 'package:chat_app/widgets/update_info_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:get/get.dart';

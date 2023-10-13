@@ -46,6 +46,7 @@ dependencies:
   sqflite: ^2.3.0
   google_sign_in: ^6.1.5
   image_picker: ^1.0.4
+  firebase_storage: ^11.2.8
 
   
 dev_dependencies:
