@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/controller/inbox_controller.dart';
 import 'package:chat_app/core/services/apis.dart';
@@ -56,7 +53,7 @@ class _InboxScreenState extends State<InboxScreen> {
             const SizedBox(height: defaultPadding),
             Expanded(
               child: StreamBuilder(
-                  stream: APIs.getAllMessages(),
+                  stream: APIs.getAllUsers(),
                   builder: (context, snapshot) {
                     switch (snapshot.connectionState) {
                       // if data is loading
@@ -68,7 +65,6 @@ class _InboxScreenState extends State<InboxScreen> {
                       case ConnectionState.active:
                       case ConnectionState.done:
                         final data = snapshot.data?.docs;
-                        log("data : ${jsonEncode(data![0].data())}");
                         controller.list = data
                                 ?.map((e) => UserModel.fromJson(e.data()))
                                 .toList() ??

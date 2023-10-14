@@ -6,9 +6,11 @@ class ChatTextField extends StatelessWidget {
     Key? key,
     required this.controller,
     required this.labelText,
+    required this.onPressed,
   }) : super(key: key);
 
   final TextEditingController controller;
+  final void Function()? onPressed;
   final String labelText;
 
   @override
@@ -23,7 +25,7 @@ class ChatTextField extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
           suffixIcon: IconButton(
-              onPressed: () {},
+              onPressed: onPressed,
               icon: const Icon(
                 Icons.send,
                 color: kprimaryColor,

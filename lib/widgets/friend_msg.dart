@@ -17,7 +17,8 @@ class FriendMsgCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        GoRouter.of(context).push("/chatDetails");
+        GoRouter.of(context)
+            .push("/chatDetails", extra: {"usermodel": userModel});
       },
       child: Column(
         children: [

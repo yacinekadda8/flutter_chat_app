@@ -1,8 +1,9 @@
 import 'package:chat_app/core/services/apis.dart';
+import 'package:chat_app/data/models/user_model.dart';
 import 'package:chat_app/screens/auth/login.dart';
 import 'package:chat_app/screens/auth/reset_password.dart';
 import 'package:chat_app/screens/auth/signup.dart';
-import 'package:chat_app/screens/chat_details.dart';
+import 'package:chat_app/screens/chat.dart';
 import 'package:chat_app/screens/inbox.dart';
 import 'package:chat_app/screens/user_settings.dart';
 
@@ -49,7 +50,10 @@ abstract class AppRouter {
           GoRoute(
             path: "chatDetails",
             builder: (BuildContext context, GoRouterState state) {
-              return const ChatDetails();
+              //final userModel = APIs.currentUser;
+              final userModel = (state.extra
+                  as Map<String, dynamic>)['usermodel'] as UserModel;
+              return Chat(userModel: userModel);
             },
           ),
           GoRoute(
@@ -58,9 +62,7 @@ abstract class AppRouter {
               final userModel = APIs.currentUser;
               // final userModel = (state.extra
               //     as Map<String, dynamic>)['usermodel'] as UserModel;
-              return UserSettings(
-                userModel: userModel,
-              );
+              return UserSettings(userModel: userModel);
             },
           ),
         ],
