@@ -144,4 +144,13 @@ class APIs {
         .collection("chats/${getConversationId(userModel.id)}/messages/");
     await ref.doc(time).set(message.toJson());
   }
+
+  static Future<void> updateReadStatus(MessageModel messageModel) async {
+    firestore
+        .collection("chats/${getConversationId(messageModel.fromid)}/messages/")
+        .doc(messageModel.sent)
+        .update({'read': DateTime.now().microsecondsSinceEpoch.toString()});
+  }
+  // get last msg of specific chat
+  //static Stream<QuerySnapshot> getLastMsg(UserModel userModel){}
 }
