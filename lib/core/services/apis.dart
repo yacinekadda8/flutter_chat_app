@@ -116,7 +116,7 @@ class APIs {
   }
 
   // *******  Inbox and Chat Screen apis *******//
-  // fot getting conversation id
+  // for getting conversation id
   static String getConversationId(String id) => user.uid.hashCode <= id.hashCode
       ? '${user.uid}_$id'
       : '${id}_${user.uid}';
@@ -151,6 +151,14 @@ class APIs {
         .doc(messageModel.sent)
         .update({'read': DateTime.now().microsecondsSinceEpoch.toString()});
   }
+
   // get last msg of specific chat
-  //static Stream<QuerySnapshot> getLastMsg(UserModel userModel){}
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getLastMsg(
+      UserModel userModel) {
+    return firestore
+        .collection("chats/${getConversationId(userModel.id)}/messages/")
+        .orderBy('sent', descending: true)
+        .limit(1)
+        .snapshots();
+  }
 }
