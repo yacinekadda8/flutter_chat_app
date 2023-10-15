@@ -1,3 +1,4 @@
+import 'package:chat_app/core/functions/my_date_util.dart';
 import 'package:chat_app/core/services/apis.dart';
 import 'package:chat_app/data/models/message_model.dart';
 import 'package:flutter/material.dart';
@@ -43,10 +44,11 @@ class _FriendMsgCardState extends State<FriendMsgCard> {
                   padding: const EdgeInsets.only(top: defaultPadding),
                   //color: kbodyTextColor,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       //CircleAvatar(backgroundImage: NetworkImage(userModel.image)),
                       CircleUserImage(userModel: widget.userModel),
+                      const SizedBox(width: defaultPadding),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -58,40 +60,30 @@ class _FriendMsgCardState extends State<FriendMsgCard> {
                               color: highlightColor,
                             ),
                           ),
-                          Text(
-                            messageModel != null
-                                ? messageModel!.msg
-                                : "Start Chating ✋",
-                            maxLines: 1,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          const Text(
-                            "6:06",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6),
-                            decoration: BoxDecoration(
-                              color: kprimaryColor,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: const Text(
-                              "1",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                          Row(
+                            children: [
+                              Text(
+                                messageModel != null
+                                    ? messageModel!.msg
+                                    : "Start Chating ✋",
+                                maxLines: 1,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                ),
                               ),
-                            ),
+                              const SizedBox(width: defaultPadding / 2),
+                              if (messageModel != null)
+                                Text(
+                                  MyDateUtil.getlastmsgtime(
+                                      context: context,
+                                      time: messageModel!.sent),
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                            ],
                           ),
                         ],
                       ),

@@ -30,10 +30,15 @@ class _InboxScreenState extends State<InboxScreen> {
         title: const Text("Chat App"),
         actions: [
           IconButton(
-              //onPressed: () => controller.logout(context),
+            onPressed: () {
+              controller.showMessageUpdateDialog(context);
+            },
+            icon: const Icon(Icons.person_add),
+          ),
+          IconButton(
               onPressed: () => context
                   .go('/userSettings', extra: {'usermodel': APIs.currentUser}),
-              icon: const Icon(Icons.settings))
+              icon: const Icon(Icons.settings)),
         ],
       ),
       body: Padding(

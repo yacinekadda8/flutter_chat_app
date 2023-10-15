@@ -1,13 +1,8 @@
-import 'dart:developer';
-
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/core/functions/my_date_util.dart';
 import 'package:chat_app/core/services/apis.dart';
 import 'package:chat_app/data/models/message_model.dart';
-import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
-import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ChatBubble extends StatefulWidget {
   const ChatBubble({
@@ -42,11 +37,12 @@ class _ChatBubbleState extends State<ChatBubble> {
               SizedBox(width: mq.width * .04),
               Text(MyDateUtil.getFormatedTime(
                   context: context, time: widget.messageModel.sent)),
-              if (widget.messageModel.read.isEmpty)
-                const Icon(
-                  Icons.done_all_rounded,
-                  color: highlightColor,
-                ),
+              //double tick icon for message read
+              widget.messageModel.read.isNotEmpty == false
+                  //sent
+                  ? const Icon(Icons.done, color: kgreyColor)
+                  // seen
+                  : const Icon(Icons.done_all_rounded, color: highlightColor)
             ],
           ),
         ),
@@ -81,7 +77,7 @@ class _ChatBubbleState extends State<ChatBubble> {
 
   Widget userGreen() {
     Size mq = MediaQuery.of(context).size;
-    // update read status
+    //update last read message if sender and receiver are different
     if (widget.messageModel.read.isEmpty) {
       APIs.updateReadStatus(widget.messageModel);
     }
@@ -120,7 +116,7 @@ class _ChatBubbleState extends State<ChatBubble> {
           child: Text(
             MyDateUtil.getFormatedTime(
                 context: context, time: widget.messageModel.sent),
-            style: TextStyle(color: kprimaryColor),
+            style: const TextStyle(color: kprimaryColor),
           ),
         ),
       ],

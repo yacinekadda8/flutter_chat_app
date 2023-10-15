@@ -161,4 +161,25 @@ class APIs {
         .limit(1)
         .snapshots();
   }
+
+  // add new friend
+  static Future<bool> addNewFriend(String email) async {
+    final data = await firestore
+        .collection('users')
+        .where('email', isEqualTo: email)
+        .get();
+    if (data.docs.isNotEmpty && data.docs.first.id != user.uid) {
+      //User Exist
+      firestore
+          .collection("users")
+          .doc(user.uid)
+          .collection("my_friends")
+          .doc(data.docs.first.id)
+          .set({});
+      return true;
+    } else {
+      //User Doesn't Exist
+      return false;
+    }
+  }
 }

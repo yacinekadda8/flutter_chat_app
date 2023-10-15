@@ -1,5 +1,8 @@
+import 'package:chat_app/constants.dart';
 import 'package:chat_app/core/services/apis.dart';
+import 'package:chat_app/core/utils/dialogs.dart';
 import 'package:chat_app/data/models/user_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -13,6 +16,83 @@ class InboxController extends GetxController {
     googleSignIn.disconnect();
     await APIs.auth.signOut();
     GoRouter.of(context).pushReplacement("/login");
+  }
+
+  //dialog for updating message content
+  void showMessageUpdateDialog(BuildContext context) {
+    String email = '';
+
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              backgroundColor: kthiredColor,
+              contentPadding: const EdgeInsets.only(
+                  left: 24, right: 24, top: 20, bottom: 10),
+
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+
+              //title
+              title: const Row(
+                children: [
+                  Icon(
+                    Icons.person_add,
+                    color: kprimaryColor,
+                    size: 24,
+                  ),
+                  SizedBox(width: defaultPadding / 2),
+                  Text('Add Friend', style: TextStyle(color: koilColor))
+                ],
+              ),
+
+              //content
+              content: TextFormField(
+                maxLines: null,
+                onChanged: (value) => email = value,
+                decoration: InputDecoration(
+                    hintText: "Add friend email",
+                    prefixIcon: const Icon(Icons.email, color: kprimaryColor),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10))),
+              ),
+
+              //actions
+              actions: [
+                //cancel button
+                MaterialButton(
+                    onPressed: () {
+                      //hide alert dialog
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      'Cancel',
+                      style: TextStyle(color: koilColor, fontSize: 16),
+                    )),
+
+                //add button
+                MaterialButton(
+                    color: kprimaryColor,
+                    onPressed: () async {
+                      //hide alert dialog
+                      Navigator.pop(context);
+                      // add new friend
+                      if (email.isNotEmpty) {
+                        await APIs.addNewFriend(email).then((value) {
+                          if (!value) {
+                            return Dialogs.showSnackbar(
+                                context, "User Doesn't Exist");
+                          } else {
+                            return Dialogs.showSnackbar(context, "Done 😍");
+                          }
+                        });
+                      }
+                    },
+                    child: const Text(
+                      'Add',
+                      style: TextStyle(color: koilColor, fontSize: 16),
+                    ))
+              ],
+            ));
   }
 
   // @override
