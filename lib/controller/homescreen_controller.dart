@@ -6,8 +6,9 @@ import 'package:get/get.dart';
 class HomescreenController extends GetxController {
   //final userModel = APIs.currentUser;
   int currentPage = 0;
+
   List<Widget> myPage = [
-    const InboxScreen(),
+    const Inbox(),
     const Requests(),
     const Column(
       mainAxisAlignment: MainAxisAlignment.center,

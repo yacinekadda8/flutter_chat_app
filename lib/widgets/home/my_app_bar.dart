@@ -14,24 +14,28 @@ class MyAppBar extends StatelessWidget {
     return Container(
       color: kprimaryColor,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          const Text(
-            "Chat App",
-            style: TextStyle(fontSize: 24, color: kblackColor),
-          ),
-          SizedBox(width: controller.mq(context).width / 3),
-          IconButton(
-            onPressed: () {
-              controller.showMessageUpdateDialog(context);
-            },
-            icon: const Icon(Icons.person_add),
-          ),
-          IconButton(
-              onPressed: () => context
-                  .go('/userSettings', extra: {'usermodel': APIs.currentUser}),
-              icon: const Icon(Icons.settings)),
-        ]),
+        padding: const EdgeInsets.only(top: 30, bottom: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              "Chat App",
+              style: TextStyle(fontSize: 24, color: kblackColor),
+            ),
+            SizedBox(width: controller.mq(context).width / 3),
+            IconButton(
+              onPressed: () {
+                controller.showMessageUpdateDialog(context);
+              },
+              icon: const Icon(Icons.person_add),
+            ),
+            IconButton(
+                onPressed: () => context.go('/userSettings',
+                    extra: {'usermodel': APIs.currentUser}),
+                icon: const Icon(Icons.settings)),
+          ],
+        ),
       ),
     );
   }
