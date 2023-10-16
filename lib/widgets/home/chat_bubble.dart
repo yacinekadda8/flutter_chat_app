@@ -1,6 +1,6 @@
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/core/functions/my_date_util.dart';
-import 'package:chat_app/core/services/apis.dart';
+import 'package:chat_app/data/apis.dart';
 import 'package:chat_app/data/models/message_model.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +42,7 @@ class _ChatBubbleState extends State<ChatBubble> {
                   //sent
                   ? const Icon(Icons.done, color: kgreyColor)
                   // seen
-                  : const Icon(Icons.done_all_rounded, color: highlightColor)
+                  : const Icon(Icons.done_all_rounded, color: kSocendColor)
             ],
           ),
         ),

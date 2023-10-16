@@ -15,7 +15,7 @@ class Authbutton extends StatelessWidget {
     Key? key,
     required this.text,
     this.backgroundColor = kprimaryColor,
-    this.foregroundColor = kthiredColor,
+    this.foregroundColor = kWhiteColor,
     this.side = BorderSide.none,
     required this.onPressed,
     this.horizontal = 10,

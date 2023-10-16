@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chat_app/constants.dart';
 import 'package:chat_app/data/models/user_model.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +29,7 @@ class CircleUserImage extends StatelessWidget {
               errorWidget: (context, url, error) =>
                   const CircleAvatar(child: Icon(Icons.person)),
             )),
-        Positioned(
+        /* Positioned(
           left: 40,
           top: 40,
           child: Container(
@@ -41,10 +40,10 @@ class CircleUserImage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50),
                 border: Border.all(
                   width: 2,
-                  color: kthiredColor,
+                  color: kWhiteColor,
                 )),
           ),
-        )
+        ) */
       ],
     );
   }

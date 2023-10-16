@@ -77,13 +77,58 @@ class APIs {
         .set(chatUser.toJson());
   }
 
-  // fetch only friends
-  static Stream<QuerySnapshot<Map<String, dynamic>>> getFriendsId() {
+  // fetch only accepted friends
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAcceptedFriendsId() {
     return firestore
         .collection("users")
         .doc(user.uid)
         .collection("my_friends")
+        .where("status", isEqualTo: "accepted")
         .snapshots();
+  }
+
+  // fetch only Pending Requests
+  static Stream<QuerySnapshot<Map<String, dynamic>>>
+      getPendingRequestsFriendsId() {
+    return firestore
+        .collection("users")
+        .doc(user.uid)
+        .collection("my_friends")
+        .where("invitation", isEqualTo: "pending")
+        .where("status", isEqualTo: "receiver") 
+        .snapshots();
+  }
+
+  static Future<void> acceptFriendRequest({required String friendId}) async {
+    // Accept the friend request
+    firestore
+        .collection("users")
+        .doc(user.uid)
+        .collection("my_friends")
+        .doc(friendId)
+        .update({
+      "status": "accepted",
+    });
+
+// Update the friend request status for the other user
+    firestore
+        .collection("users")
+        .doc(friendId)
+        .collection("my_friends")
+        .doc(user.uid)
+        .update({
+      "status": "accepted",
+    });
+  }
+
+  static Future<void> rejectFriendRequest({required String friendId}) async {
+// Reject the friend request
+    firestore
+        .collection("users")
+        .doc(user.uid)
+        .collection("my_friends")
+        .doc(friendId)
+        .delete(); // or set the status to "rejected"
   }
 
   // fetch all users from firestore
@@ -173,62 +218,41 @@ class APIs {
         .snapshots();
   }
 
-
 // Add new friend for both users
-static Future<bool> addNewFriend(String email) async {
-  final data = await firestore
-      .collection('users')
-      .where('email', isEqualTo: email)
-      .get();
-  
-  if (data.docs.isNotEmpty) {
-    final friendId = data.docs.first.id;
-    
-    if (friendId == user.uid) {
-      // The user is trying to add themselves as a friend, you can handle this as needed.
-      return false;
-    }
-
-    // Add the friend for the current user
-    firestore
-        .collection("users")
-        .doc(user.uid)
-        .collection("my_friends")
-        .doc(friendId)
-        .set({});
-
-    // Add the current user as a friend for the user receiving the invitation
-    firestore
-        .collection("users")
-        .doc(friendId)
-        .collection("my_friends")
-        .doc(user.uid)
-        .set({});
-
-    return true;
-  } else {
-    // User Doesn't Exist
-    return false;
-  }
-}
-  // add new friend
-/*   static Future<bool> addNewFriend(String email) async {
+  static Future<bool> addNewFriend(String email) async {
     final data = await firestore
         .collection('users')
         .where('email', isEqualTo: email)
         .get();
-    if (data.docs.isNotEmpty && data.docs.first.id != user.uid) {
-      //User Exist
+
+    if (data.docs.isNotEmpty) {
+      final friendId = data.docs.first.id;
+
+      if (friendId == user.uid) {
+        // The user is trying to add themselves as a friend, you can handle this as needed.
+        return false;
+      }
+
+      // Add the friend for the current user
       firestore
           .collection("users")
           .doc(user.uid)
           .collection("my_friends")
-          .doc(data.docs.first.id)
-          .set({});
+          .doc(friendId)
+          .set({"invitation": "pending", "status": "sender"});
+
+      // Add the current user as a friend for the user receiving the invitation
+      firestore
+          .collection("users")
+          .doc(friendId)
+          .collection("my_friends")
+          .doc(user.uid)
+          .set({"invitation": "pending", "status": "receiver"});
+
       return true;
     } else {
-      //User Doesn't Exist
+      // User Doesn't Exist
       return false;
     }
-  } */
+  }
 }

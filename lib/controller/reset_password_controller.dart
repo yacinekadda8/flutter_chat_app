@@ -1,6 +1,6 @@
 // ignore_for_file: unused_import
 
-import 'package:chat_app/core/services/apis.dart';
+import 'package:chat_app/data/apis.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

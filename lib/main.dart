@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:chat_app/constants.dart';
-import 'package:chat_app/core/services/apis.dart';
+import 'package:chat_app/data/apis.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,15 +43,15 @@ class MyApp extends StatelessWidget {
                 ),
                 colorScheme: ColorScheme.fromSeed(seedColor: kprimaryColor),
                 useMaterial3: true,
-                scaffoldBackgroundColor: kthiredColor,
+                scaffoldBackgroundColor: kWhiteColor,
                 textTheme:
                     GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
                         .apply(bodyColor: Colors.white)
                         .copyWith(
                           bodyLarge: const TextStyle(color: kbodyTextColor),
                           bodyMedium: const TextStyle(color: kbodyTextColor),
-                          displayLarge: const TextStyle(color: kthiredColor),
-                          displayMedium: const TextStyle(color: kthiredColor),
+                          displayLarge: const TextStyle(color: kWhiteColor),
+                          displayMedium: const TextStyle(color: kWhiteColor),
                         ),
               ),
               routerConfig: AppRouter.router,

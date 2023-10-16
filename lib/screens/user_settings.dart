@@ -5,7 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/controller/user_settings_controller.dart';
 import 'package:chat_app/core/functions/snack_bar.dart';
-import 'package:chat_app/core/services/apis.dart';
+import 'package:chat_app/data/apis.dart';
 import 'package:chat_app/data/models/user_model.dart';
 import 'package:chat_app/widgets/auth/auth_btn.dart';
 import 'package:flutter/material.dart';
@@ -92,7 +92,7 @@ class UserSettings extends StatelessWidget {
                               },
                               icon: const Icon(
                                 Icons.edit,
-                                color: highlightColor,
+                                color: kSocendColor,
                                 size: 20,
                               )),
                         ),

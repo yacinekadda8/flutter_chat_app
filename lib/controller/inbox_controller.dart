@@ -1,5 +1,5 @@
 import 'package:chat_app/constants.dart';
-import 'package:chat_app/core/services/apis.dart';
+import 'package:chat_app/data/apis.dart';
 import 'package:chat_app/core/utils/dialogs.dart';
 import 'package:chat_app/data/models/user_model.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +11,10 @@ class InboxController extends GetxController {
   late List<UserModel> list;
   final List<UserModel> searchList = [];
   GoogleSignIn googleSignIn = GoogleSignIn();
+
+  Size mq(context) {
+    return MediaQuery.of(context).size;
+  }
 
   void logout(context) async {
     googleSignIn.disconnect();
@@ -25,7 +29,7 @@ class InboxController extends GetxController {
     showDialog(
         context: context,
         builder: (_) => AlertDialog(
-              backgroundColor: kthiredColor,
+              backgroundColor: kWhiteColor,
               contentPadding: const EdgeInsets.only(
                   left: 24, right: 24, top: 20, bottom: 10),
 

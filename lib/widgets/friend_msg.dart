@@ -1,5 +1,5 @@
 import 'package:chat_app/core/functions/my_date_util.dart';
-import 'package:chat_app/core/services/apis.dart';
+import 'package:chat_app/data/apis.dart';
 import 'package:chat_app/data/models/message_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -57,7 +57,7 @@ class _FriendMsgCardState extends State<FriendMsgCard> {
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: highlightColor,
+                              color: kSocendColor,
                             ),
                           ),
                           Row(

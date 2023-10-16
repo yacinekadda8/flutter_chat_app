@@ -62,7 +62,7 @@ class Login extends StatelessWidget {
                             'Login',
                             textAlign: TextAlign.left,
                             style: TextStyle(
-                                color: kthiredColor,
+                                color: kWhiteColor,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 40),
                           ),
@@ -73,7 +73,7 @@ class Login extends StatelessWidget {
                 ),
               ),
               Container(
-                color: kthiredColor,
+                color: kWhiteColor,
                 height: dHeight / 1.5,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -90,7 +90,7 @@ class Login extends StatelessWidget {
                         GoRouter.of(context).pushReplacement("/resetPassword");
                       },
                       style: TextButton.styleFrom(
-                          foregroundColor: highlightColor, // text color
+                          foregroundColor: kSocendColor, // text color
                           alignment: Alignment.topRight,
                           padding: const EdgeInsets.symmetric(
                               horizontal: defaultPadding / 2),
@@ -113,10 +113,10 @@ class Login extends StatelessWidget {
                     Authbutton(
                       onPressed: () => context.go("/signup"),
                       text: 'Sign up',
-                      backgroundColor: kthiredColor,
-                      foregroundColor: highlightColor,
+                      backgroundColor: kWhiteColor,
+                      foregroundColor: kSocendColor,
                       side: const BorderSide(
-                        color: highlightColor,
+                        color: kSocendColor,
                         width: 2,
                       ),
                     ),

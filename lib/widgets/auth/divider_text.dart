@@ -23,7 +23,7 @@ class DividerText extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(defaultPadding / 2),
             decoration: BoxDecoration(
-              color: kthiredColor,
+              color: kWhiteColor,
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Text(
@@ -31,7 +31,7 @@ class DividerText extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                backgroundColor: kthiredColor,
+                backgroundColor: kWhiteColor,
               ),
             ),
           ),

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/controller/chat_controller.dart';
-import 'package:chat_app/core/services/apis.dart';
+import 'package:chat_app/data/apis.dart';
 import 'package:chat_app/data/models/message_model.dart';
 import 'package:chat_app/data/models/user_model.dart';
 import 'package:chat_app/widgets/home/chat_text_field.dart';
@@ -35,8 +35,7 @@ class Chat extends StatelessWidget {
                 width: 35,
                 fit: BoxFit.cover,
                 // *******************  Image of User ************************//
-                imageUrl:
-                    userModel.image, //userModel.image.toString(),
+                imageUrl: userModel.image, //userModel.image.toString(),
                 //placeholder: (context, url) => CircularProgressIndicator(),
                 errorWidget: (context, url, error) =>
                     const CircleAvatar(child: Icon(Icons.person)),
@@ -45,13 +44,13 @@ class Chat extends StatelessWidget {
           ],
         ),
         leadingWidth: 90,
-        title:  Text(
+        title: Text(
           // *******************  Name of User ************************//
           userModel.name,
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: highlightColor,
+            color: kSocendColor,
           ),
         ),
       ),

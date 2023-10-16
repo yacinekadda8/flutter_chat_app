@@ -53,7 +53,7 @@ class WelcomePage extends GetView<WelcomeController> {
                                   textAlign: TextAlign.center,
                                   softWrap: true,
                                   style: TextStyle(
-                                    color: highlightColor,
+                                    color: kSocendColor,
                                     fontSize: 24,
                                   ),
                                 ),
@@ -78,7 +78,7 @@ class WelcomePage extends GetView<WelcomeController> {
                                 softWrap: true,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: highlightColor,
+                                  color: kSocendColor,
                                   fontSize: 24,
                                 ),
                               ),
@@ -103,7 +103,7 @@ class WelcomePage extends GetView<WelcomeController> {
                                   softWrap: true,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: highlightColor,
+                                    color: kSocendColor,
                                     fontSize: 24,
                                   ),
                                 ),
@@ -156,7 +156,7 @@ class WelcomePage extends GetView<WelcomeController> {
                       reversed: false,
                       mainAxisAlignment: MainAxisAlignment.center,
                       decorator: DotsDecorator(
-                          activeColor: highlightColor,
+                          activeColor: kSocendColor,
                           size: const Size.square(9),
                           activeSize: const Size(18, 9),
                           activeShape: RoundedRectangleBorder(
