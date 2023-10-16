@@ -57,45 +57,138 @@ class _InboxScreenState extends State<InboxScreen> {
             ),
             const SizedBox(height: defaultPadding),
             Expanded(
-              child: StreamBuilder(
-                  stream: APIs.getAllUsers(),
-                  builder: (context, snapshot) {
-                    switch (snapshot.connectionState) {
-                      // if data is loading
-                      case ConnectionState.waiting:
-                      case ConnectionState.none:
-                        return const Center(child: CircularProgressIndicator());
+                child: StreamBuilder(
+              stream: APIs.getFriendsId(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final friendIds =
+                      snapshot.data?.docs.map((e) => e.id).toList() ?? [];
 
-                      // if some or all data load
-                      case ConnectionState.active:
-                      case ConnectionState.done:
-                        final data = snapshot.data?.docs;
-                        controller.list = data
-                                ?.map((e) => UserModel.fromJson(e.data()))
-                                .toList() ??
-                            [];
+                  if (friendIds.isNotEmpty) {
+                    return StreamBuilder(
+                      stream: APIs.getAllUsers(friendsId: friendIds),
+                      builder: (context, snapshot) {
+                        // Rest of your StreamBuilder code here
+                        switch (snapshot.connectionState) {
+                          // if data is loading
+                          case ConnectionState.waiting:
+                          case ConnectionState.none:
+                            return const Center(
+                                child: CircularProgressIndicator());
 
-                        if (controller.list.isNotEmpty) {
-                          return ListView.builder(
-                            itemCount: controller.list.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return FriendMsgCard(
-                                  userModel: controller.list[index]);
-                            },
-                          );
-                        } else {
-                          return const Text(
-                            "No Data yet...",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: highlightColor,
-                            ),
-                          );
+                          // if some or all data load
+                          case ConnectionState.active:
+                          case ConnectionState.done:
+                            final data = snapshot.data?.docs;
+                            controller.list = data
+                                    ?.map((e) => UserModel.fromJson(e.data()))
+                                    .toList() ??
+                                [];
+
+                            if (controller.list.isNotEmpty) {
+                              return ListView.builder(
+                                itemCount: controller.list.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return FriendMsgCard(
+                                      userModel: controller.list[index]);
+                                },
+                              );
+                            } else {
+                              return const Text(
+                                "No Data yet...",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: highlightColor,
+                                ),
+                              );
+                            }
                         }
-                    }
-                  }),
-            ),
+                      },
+                    );
+                  } else {
+                    return const Center(
+                      child: Text(
+                        "No Chat available yet",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: highlightColor,
+                        ),
+                      ),
+                    );
+                  }
+                } else if (snapshot.hasError) {
+                  return const Center(child: Text('error!'));
+                }
+
+                return const Center(child: CircularProgressIndicator());
+              },
+            )
+                /* StreamBuilder(
+                stream: APIs.getFriendsId(),
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    // if data is loading
+                    case ConnectionState.waiting:
+                    case ConnectionState.none:
+                      return const Center(child: CircularProgressIndicator());
+
+                    // if some or all data load
+                    case ConnectionState.active:
+                    case ConnectionState.done:
+                      return StreamBuilder(
+                          stream: APIs.getAllUsers(
+                            // friendsId:
+                            //     snapshot.data?.docs.map((e) => e.id).toList() ??
+                            //         [],
+                            friendsId: snapshot.data?.docs.isNotEmpty == true
+                                ? snapshot.data!.docs.map((e) => e.id).toList()
+                                : [],
+                          ),
+                          builder: (context, snapshot) {
+                            switch (snapshot.connectionState) {
+                              // if data is loading
+                              case ConnectionState.waiting:
+                              case ConnectionState.none:
+                                return const Center(
+                                    child: CircularProgressIndicator());
+
+                              // if some or all data load
+                              case ConnectionState.active:
+                              case ConnectionState.done:
+                                final data = snapshot.data?.docs;
+                                controller.list = data
+                                        ?.map(
+                                            (e) => UserModel.fromJson(e.data()))
+                                        .toList() ??
+                                    [];
+
+                                if (controller.list.isNotEmpty) {
+                                  return ListView.builder(
+                                    itemCount: controller.list.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return FriendMsgCard(
+                                          userModel: controller.list[index]);
+                                    },
+                                  );
+                                } else {
+                                  return const Text(
+                                    "No Data yet...",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: highlightColor,
+                                    ),
+                                  );
+                                }
+                            }
+                          });
+                  }
+                },
+              ) */
+                ),
           ],
         ),
       ),
