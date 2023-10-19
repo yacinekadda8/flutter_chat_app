@@ -33,12 +33,6 @@ class RequestsCard extends StatelessWidget {
             h: .12,
             w: .12,
           ),
-          // Image.network(
-          //   image,
-          //   height: DeviceSize.mq(context).width / 3,
-          //   width: DeviceSize.mq(context).width / 3,
-          //   fit: BoxFit.cover,
-          // ),
           Column(
             children: [
               Text(

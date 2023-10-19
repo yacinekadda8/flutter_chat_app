@@ -1,6 +1,6 @@
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/data/apis.dart';
-import 'package:chat_app/core/utils/dialogs.dart';
+import 'package:chat_app/core/utils/mydialogs.dart';
 import 'package:chat_app/data/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -83,10 +83,10 @@ class InboxController extends GetxController {
                       if (email.isNotEmpty) {
                         await APIs.addNewFriend(email).then((value) {
                           if (!value) {
-                            return Dialogs.showSnackbar(
+                            return MyDialogs.showSnackbar(
                                 context, "User Doesn't Exist");
                           } else {
-                            return Dialogs.showSnackbar(context, "Done 😍");
+                            return MyDialogs.showSnackbar(context, "Done 😍");
                           }
                         });
                       }
@@ -99,6 +99,21 @@ class InboxController extends GetxController {
             ));
   }
 
+  void deleteChatInConversation(BuildContext context, UserModel user) {
+    MyDialogs.confrmationDialog(
+        context: context,
+        title: "Delete Chat In Conversation",
+        content:
+            "Are you sure you want to delete the chat in this Conversation ?",
+        actionBtnText: "Delete",
+        onActionBtnBgColor: kRedColor,
+        onActionBtnPressed: () async {
+          Navigator.of(context).pop();
+          // Call the deleteChatConversation function when the user confirms
+          await APIs.deleteChatInConversation(user);
+        });
+    update();
+  }
   // @override
   // void onInit() {
   //   super.onInit();

@@ -5,6 +5,7 @@ import 'package:chat_app/screens/auth/reset_password.dart';
 import 'package:chat_app/screens/auth/signup.dart';
 import 'package:chat_app/screens/chat.dart';
 import 'package:chat_app/screens/home_screen.dart';
+import 'package:chat_app/screens/inbox.dart';
 import 'package:chat_app/screens/requests.dart';
 import 'package:chat_app/screens/user_settings.dart';
 
@@ -48,6 +49,7 @@ abstract class AppRouter {
               return const HomeScreen();
             },
           ),
+
           GoRoute(
             path: "chatDetails",
             builder: (BuildContext context, GoRouterState state) {

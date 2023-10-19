@@ -95,7 +95,7 @@ class APIs {
         .doc(user.uid)
         .collection("my_friends")
         .where("invitation", isEqualTo: "pending")
-        .where("status", isEqualTo: "receiver") 
+        .where("status", isEqualTo: "receiver")
         .snapshots();
   }
 
@@ -254,5 +254,41 @@ class APIs {
       // User Doesn't Exist
       return false;
     }
+  }
+
+  // Create a function to delete a chat conversation:
+  static Future<void> deleteChatInConversation(UserModel user) async {
+    final conversationId = APIs.getConversationId(user.id);
+
+    // Delete the chat conversation document
+    await firestore.collection("chats").doc(conversationId).delete();
+
+    // Delete all messages associated with the conversation
+    await firestore.collection("chats/$conversationId/messages").get().then(
+      (querySnapshot) {
+        querySnapshot.docs.forEach((messageDoc) {
+          messageDoc.reference.delete();
+        });
+      },
+    );
+  }
+
+  //
+  static Future<void> removeFriend(String friendId) async {
+    // Remove the friend from the current user's friends list
+    await firestore
+        .collection("users")
+        .doc(user.uid)
+        .collection("my_friends")
+        .doc(friendId)
+        .delete();
+
+    // Optionally, remove the current user from the friend's friends list
+    await firestore
+        .collection("users")
+        .doc(friendId)
+        .collection("my_friends")
+        .doc(user.uid)
+        .delete();
   }
 }

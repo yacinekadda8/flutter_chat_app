@@ -31,7 +31,7 @@ class _InboxState extends State<Inbox> {
       children: [
         const MyAppBar(),
         const SizedBox(height: defaultPadding),
-        Container(
+        SizedBox(
           height: DeviceSize.mq(context).height / 1.3,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
@@ -82,8 +82,15 @@ class _InboxState extends State<Inbox> {
                                     itemCount: controller.list.length,
                                     itemBuilder:
                                         (BuildContext context, int index) {
-                                      return FriendMsgCard(
-                                          userModel: controller.list[index]);
+                                      return InkWell(
+                                        onLongPress: () {
+                                          controller.deleteChatInConversation(
+                                              context, controller.list[index]);
+                                          // APIs.deleteChatConversation(controller.list[index]);
+                                        },
+                                        child: FriendMsgCard(
+                                            userModel: controller.list[index]),
+                                      );
                                     },
                                   );
                                 } else {

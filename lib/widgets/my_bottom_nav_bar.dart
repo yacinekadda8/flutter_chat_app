@@ -12,7 +12,7 @@ class MyBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       //color: kSocendColor,
       height: 64,
       child: Row(

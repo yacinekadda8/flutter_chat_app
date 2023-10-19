@@ -19,15 +19,20 @@ class Chat extends StatelessWidget {
     ChatController controller = Get.put(ChatController());
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              controller.showEditFriendBottomSheet(context, userModel.id);
+            },
+            icon: const Icon(Icons.menu),
+          ),
+        ],
         leading: Row(
           children: [
             IconButton(
               onPressed: () => context.pop(),
               icon: const Icon(Icons.arrow_back_ios),
             ),
-            // const CircleAvatar(
-            //   backgroundImage: AssetImage("assets/images/ronaldo.jpg"),
-            // ),
             ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: CachedNetworkImage(
@@ -50,7 +55,7 @@ class Chat extends StatelessWidget {
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: kSocendColor,
+            color: kblackColor,
           ),
         ),
       ),
@@ -103,19 +108,6 @@ class Chat extends StatelessWidget {
           ],
         ),
       ),
-      // Container(
-      //   padding: const EdgeInsets.all(defaultPadding),
-      //   child: ListView.builder(
-      //     itemCount: 4,
-      //     itemBuilder: (BuildContext context, int index) {
-      //       return ChatBubble(
-      //         isMe: true,
-      //         topLeft: 30,
-      //         messageModel: controller.messagesList[index],
-      //       );
-      //     },
-      //   ),
-      // ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(defaultPadding / 2),
         child: ChatTextField(
