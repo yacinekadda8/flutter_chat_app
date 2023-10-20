@@ -35,7 +35,7 @@ class _ChatBubbleState extends State<ChatBubble> {
           child: Row(
             children: [
               SizedBox(width: mq.width * .04),
-              Text(MyDateUtil.getFormatedTime(
+              Text(MyDateUtil.getFormattedTime(
                   context: context, time: widget.messageModel.sent)),
               //double tick icon for message read
               widget.messageModel.read.isNotEmpty == false
@@ -114,7 +114,7 @@ class _ChatBubbleState extends State<ChatBubble> {
         Padding(
           padding: EdgeInsets.only(right: mq.width * .04, top: 25),
           child: Text(
-            MyDateUtil.getFormatedTime(
+            MyDateUtil.getFormattedTime(
                 context: context, time: widget.messageModel.sent),
             style: const TextStyle(color: kprimaryColor),
           ),

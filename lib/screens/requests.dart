@@ -33,7 +33,7 @@ class Requests extends StatelessWidget {
                     GoRouter.of(context).push('/sentRequests');
                   },
                   child: Container(
-                    color: kSocendColor,
+                    //color: kSocendColor,
                     child: const Row(
                       children: [
                         Text(
@@ -41,14 +41,14 @@ class Requests extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
-                            color: kWhiteColor,
+                            color: koilColor,
                           ),
                         ),
                         Spacer(),
                         Icon(
                           Icons.person_search,
                           size: 30,
-                          color: kWhiteColor,
+                          color: koilColor,
                         )
                       ],
                     ),

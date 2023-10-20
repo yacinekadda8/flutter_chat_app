@@ -207,7 +207,13 @@ class APIs {
 
   //TODO
   // Update Active Status
-  static Future<void> updateActiveStatus(bool isOnline) async {}
+  static Future<void> updateActiveStatus(bool isOnline) async {
+    String lastActive = DateTime.now().microsecondsSinceEpoch.toString();
+    firestore
+        .collection("users")
+        .doc(user.uid)
+        .update({"is_online": isOnline, "last_active": lastActive});
+  }
 
   //update user info
   static Future<void> updateUserInfo() async {
@@ -311,7 +317,7 @@ class APIs {
           .set({
         "invitation": "pending",
         "status": "sender",
-        "send_time":time.toString()
+        "send_time": time.toString()
       });
 
       // Add the current user as a friend for the user receiving the invitation
@@ -323,7 +329,7 @@ class APIs {
           .set({
         "invitation": "pending",
         "status": "receiver",
-        "receive_time":time.toString()
+        "receive_time": time.toString()
       });
 
       return true;

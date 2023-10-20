@@ -83,7 +83,7 @@ class _FriendMsgCardState extends State<FriendMsgCard> {
                               const SizedBox(width: defaultPadding / 2),
                               if (messageModel != null)
                                 Text(
-                                  MyDateUtil.getlastmsgtime(
+                                  MyDateUtil.getLastMessageTime(
                                       context: context,
                                       time: messageModel!.sent),
                                   style: const TextStyle(

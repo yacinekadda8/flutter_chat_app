@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/controller/inbox_controller.dart';
 import 'package:chat_app/core/utils/device_size.dart';
@@ -6,6 +8,7 @@ import 'package:chat_app/data/models/user_model.dart';
 import 'package:chat_app/widgets/friend_msg.dart';
 import 'package:chat_app/widgets/home/my_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class Inbox extends StatefulWidget {
@@ -18,8 +21,19 @@ class Inbox extends StatefulWidget {
 class _InboxState extends State<Inbox> {
   @override
   void initState() {
+    // Set User status to active on start
+    APIs.updateActiveStatus(true);
+
     APIs.getCurrentUserInfo();
     super.initState();
+    // Set User status to accord to lifecycle
+    SystemChannels.lifecycle.setMessageHandler((message) {
+      log("message: $message");
+      if (message.toString().contains("pause")) APIs.updateActiveStatus(false);
+      if (message.toString().contains("resume")) APIs.updateActiveStatus(true);
+
+      return Future.value(message);
+    });
   }
 
   @override
