@@ -4,8 +4,8 @@ import 'package:chat_app/data/models/user_model.dart';
 import 'package:chat_app/widgets/circel_user_image.dart';
 import 'package:flutter/material.dart';
 
-class RequestsCard extends StatelessWidget {
-  const RequestsCard({
+class SentRequestsCard extends StatelessWidget {
+  const SentRequestsCard({
     super.key,
     required this.userModel,
     required this.image,
@@ -46,32 +46,23 @@ class RequestsCard extends StatelessWidget {
                 children: [
                   TextButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: kprimaryColor,
+                          backgroundColor: kbodyTextColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
                           textStyle: const TextStyle(
                             color: kWhiteColor,
                           )),
                       onPressed: () {
-                        APIs.acceptFriendRequest(friendId: id);
+                        APIs.cancelFriendRequest(friendId: id);
                       },
                       child: const Text(
-                        "Confirm",
+                        " Cancel ",
                         style: TextStyle(
-                          color: kWhiteColor,
+                          color: koilColor,
                           fontWeight: FontWeight.normal,
+                          fontSize: 14,
                         ),
                       )),
-                  const SizedBox(width: defaultPadding / 2),
-                  TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: kbodyTextColor,
-                      ),
-                      onPressed: () {
-                        APIs.rejectFriendRequest(friendId: id);
-                      },
-                      child: const Text(" Delete ",
-                          style: TextStyle(
-                              color: kblackColor,
-                              fontWeight: FontWeight.normal))),
                 ],
               )
             ],

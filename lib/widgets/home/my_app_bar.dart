@@ -26,7 +26,7 @@ class MyAppBar extends StatelessWidget {
             SizedBox(width: controller.mq(context).width / 3),
             IconButton(
               onPressed: () {
-                controller.showMessageUpdateDialog(context);
+                controller.addFriendUI(context);
               },
               icon: const Icon(Icons.person_add),
             ),

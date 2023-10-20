@@ -99,6 +99,18 @@ class APIs {
         .snapshots();
   }
 
+  // fetch only Sent Requests
+  static Stream<QuerySnapshot<Map<String, dynamic>>>
+      getSentRequestsFriendsId() {
+    return firestore
+        .collection("users")
+        .doc(user.uid)
+        .collection("my_friends")
+        .where("invitation", isEqualTo: "pending")
+        .where("status", isEqualTo: "sender")
+        .snapshots();
+  }
+
   static Future<void> acceptFriendRequest({required String friendId}) async {
     // Accept the friend request
     firestore
@@ -122,13 +134,55 @@ class APIs {
   }
 
   static Future<void> rejectFriendRequest({required String friendId}) async {
-// Reject the friend request
+// // Reject the friend request
+//     firestore
+//         .collection("users")
+//         .doc(user.uid)
+//         .collection("my_friends")
+//         .doc(friendId)
+//         .delete();
+    // or set the status to "rejected"
+    // rejected the friend request
     firestore
         .collection("users")
         .doc(user.uid)
         .collection("my_friends")
         .doc(friendId)
-        .delete(); // or set the status to "rejected"
+        .update({
+      "status": "rejected",
+    });
+
+// Update the friend request status for the other user
+    firestore
+        .collection("users")
+        .doc(friendId)
+        .collection("my_friends")
+        .doc(user.uid)
+        .update({
+      "status": "rejected",
+    });
+  }
+
+  static Future<void> cancelFriendRequest({required String friendId}) async {
+    // Accept the friend request
+    firestore
+        .collection("users")
+        .doc(user.uid)
+        .collection("my_friends")
+        .doc(friendId)
+        .update({
+      "status": "canceled",
+    });
+
+// Update the friend request status for the other user
+    firestore
+        .collection("users")
+        .doc(friendId)
+        .collection("my_friends")
+        .doc(user.uid)
+        .update({
+      "status": "canceled",
+    });
   }
 
   // fetch all users from firestore
@@ -140,6 +194,20 @@ class APIs {
         //.where("id", isNotEqualTo: user.uid)
         .snapshots();
   }
+
+  // online * ofline status
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getUserInfo(
+      UserModel userModel) {
+    return firestore
+        .collection("users")
+        .where("id", isEqualTo: userModel.id)
+        //.where("id", isNotEqualTo: user.uid)
+        .snapshots();
+  }
+
+  //TODO
+  // Update Active Status
+  static Future<void> updateActiveStatus(bool isOnline) async {}
 
   //update user info
   static Future<void> updateUserInfo() async {
@@ -220,6 +288,7 @@ class APIs {
 
 // Add new friend for both users
   static Future<bool> addNewFriend(String email) async {
+    final time = DateTime.now().millisecondsSinceEpoch.toString();
     final data = await firestore
         .collection('users')
         .where('email', isEqualTo: email)
@@ -239,7 +308,11 @@ class APIs {
           .doc(user.uid)
           .collection("my_friends")
           .doc(friendId)
-          .set({"invitation": "pending", "status": "sender"});
+          .set({
+        "invitation": "pending",
+        "status": "sender",
+        "send_time":time.toString()
+      });
 
       // Add the current user as a friend for the user receiving the invitation
       firestore
@@ -247,7 +320,11 @@ class APIs {
           .doc(friendId)
           .collection("my_friends")
           .doc(user.uid)
-          .set({"invitation": "pending", "status": "receiver"});
+          .set({
+        "invitation": "pending",
+        "status": "receiver",
+        "receive_time":time.toString()
+      });
 
       return true;
     } else {

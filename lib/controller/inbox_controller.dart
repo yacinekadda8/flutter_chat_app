@@ -23,7 +23,7 @@ class InboxController extends GetxController {
   }
 
   //dialog for updating message content
-  void showMessageUpdateDialog(BuildContext context) {
+  void addFriendUI(BuildContext context) {
     String email = '';
 
     showDialog(
@@ -86,7 +86,8 @@ class InboxController extends GetxController {
                             return MyDialogs.showSnackbar(
                                 context, "User Doesn't Exist");
                           } else {
-                            return MyDialogs.showSnackbar(context, "Done 😍");
+                            return MyDialogs.showSnackbar(
+                                context, "Request has been sent 😍");
                           }
                         });
                       }

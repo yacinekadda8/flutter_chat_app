@@ -3,10 +3,11 @@ import 'package:chat_app/controller/inbox_controller.dart';
 import 'package:chat_app/core/utils/device_size.dart';
 import 'package:chat_app/data/apis.dart';
 import 'package:chat_app/data/models/user_model.dart';
-import 'package:chat_app/widgets/Requests/requests_card.dart';
+import 'package:chat_app/widgets/Requests/pending_requests_card.dart';
 import 'package:chat_app/widgets/home/my_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class Requests extends StatelessWidget {
   const Requests({super.key});
@@ -27,6 +28,32 @@ class Requests extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                GestureDetector(
+                  onTap: () {
+                    GoRouter.of(context).push('/sentRequests');
+                  },
+                  child: Container(
+                    color: kSocendColor,
+                    child: const Row(
+                      children: [
+                        Text(
+                          "View sent requests",
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: kWhiteColor,
+                          ),
+                        ),
+                        Spacer(),
+                        Icon(
+                          Icons.person_search,
+                          size: 30,
+                          color: kWhiteColor,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
                 const Text(
                   "Pending Requests",
                   style: TextStyle(
@@ -71,7 +98,7 @@ class Requests extends StatelessWidget {
                                     itemCount: controller.list.length,
                                     itemBuilder:
                                         (BuildContext context, int index) {
-                                      return RequestsCard(
+                                      return PendingRequestsCard(
                                           userModel: controller.list[index],
                                           image: controller.list[index].image,
                                           name: controller.list[index].name,

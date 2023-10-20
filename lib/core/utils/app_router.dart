@@ -5,10 +5,9 @@ import 'package:chat_app/screens/auth/reset_password.dart';
 import 'package:chat_app/screens/auth/signup.dart';
 import 'package:chat_app/screens/chat.dart';
 import 'package:chat_app/screens/home_screen.dart';
-import 'package:chat_app/screens/inbox.dart';
 import 'package:chat_app/screens/requests.dart';
+import 'package:chat_app/screens/sent_requests.dart';
 import 'package:chat_app/screens/user_settings.dart';
-
 import 'package:chat_app/screens/welcome/view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -72,6 +71,12 @@ abstract class AppRouter {
             path: "pendingRequests",
             builder: (BuildContext context, GoRouterState state) {
               return const Requests();
+            },
+          ),
+          GoRoute(
+            path: "sentRequests",
+            builder: (BuildContext context, GoRouterState state) {
+              return const SentRequests();
             },
           ),
         ],

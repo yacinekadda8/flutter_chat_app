@@ -1,4 +1,5 @@
 import 'package:chat_app/core/functions/my_date_util.dart';
+import 'package:chat_app/core/utils/device_size.dart';
 import 'package:chat_app/data/apis.dart';
 import 'package:chat_app/data/models/message_model.dart';
 import 'package:flutter/material.dart';
@@ -52,24 +53,31 @@ class _FriendMsgCardState extends State<FriendMsgCard> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            widget.userModel.name,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: kSocendColor,
+                          SizedBox(
+                             width: DeviceSize.mq(context).width / 3,
+                            child: Text(
+                              widget.userModel.name,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: kSocendColor,
+                              ),
                             ),
                           ),
                           Row(
                             children: [
-                              Text(
-                                messageModel != null
-                                    ? messageModel!.msg
-                                    : "Start Chating ✋",
-                                maxLines: 1,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.normal,
+                              SizedBox(
+                                width: DeviceSize.mq(context).width / 3,
+                                child: Text(
+                                  messageModel != null
+                                      ? messageModel!.msg
+                                      : "Start Chating ✋",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.normal,
+                                  ),
                                 ),
                               ),
                               const SizedBox(width: defaultPadding / 2),

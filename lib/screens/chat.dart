@@ -108,8 +108,14 @@ class Chat extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.all(defaultPadding / 2),
+      floatingActionButton: Container(
+        //padding: const EdgeInsets.all(defaultPadding / 2),
+        height: 60,
+        width: double.infinity,
+        //color: Colors.red,
+        padding: EdgeInsets.zero,
+        margin: const EdgeInsets.only(left: defaultPadding * 2),
+        alignment: Alignment.bottomCenter,
         child: ChatTextField(
           onPressed: () {
             if (controller.textEditingController.text.isNotEmpty) {
