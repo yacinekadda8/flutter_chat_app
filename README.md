@@ -4,7 +4,7 @@
 Using Getx and MVC,
  Welcome Screen ► Sign in & Sign up ► Email Validation ► Forget Password ► Change Password ► Chats Screen ► Search Chats ► Message Screen  ► Edit Profile Screen ► Pending requests ► Sent requests
 
-![MyMockup](https://github.com/yacinekadda8/flutter_chat_app/assets/79672812/e31532ca-8dab-45e4-8800-6dd1ad944882)
+![MyMockup](https://github.com/yacinekadda8/flutter_chat_app/assets/79672812/534a25df-99a4-4d7f-9c40-0dfa6a6531b6)
 
 Welcome
 
