@@ -2,16 +2,6 @@
 
 ## A Chat App Flutter project with Firebase.
 Using Getx and MVC,
+Splash Screen ► Welcome Screen ► Sign in & Sign up ► Email Validation ► Forget Password ► Change Password ► Chats Screen ► Search Chats ► Message Screen ► Audio Call ► Video Call ► Contacts ► Search Contacts ► Call History ► Search on Call history ► Profile Screen ► Edit Profile
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
